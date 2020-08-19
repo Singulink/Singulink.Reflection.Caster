@@ -14,7 +14,7 @@ Supported Runtimes: Anywhere .NET Standard 2.0 is supported, including .NET Fram
 
 ## Usage
 
-All the functionality is exposed via static methods the `Caster` class. If the types are known at compile time then the generic methods are the fastest and easiest to use. For example, if you wanted to write a method that converts a generic value to a generic enum, you could do this:
+All the functionality is exposed via static methods on the `Caster` class. If the types are known at compile time then the generic methods are the fastest and easiest to use. For example, if you wanted to write a method that converts a generic value to a generic enum, you could do this:
 
 ```c#
 // Convert input to an enum type:
