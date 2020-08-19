@@ -65,7 +65,7 @@ The `ChangeType` method relies on types implementing the `IConvertible` interfac
 
 Since `Caster` generates the same code as normal casts, its behavior can differ significantly from `ChangeType` which often does a lot of voodoo magic to coerce values into the requested type. For example, it attempts to parse string values and converts between boolean and numeric data types, both things that casts (and thus `Caster`) do not do. If you are expecting normal casting behavior then using `ChangeType` can lead to unexpected results in many circumstances.
 
-Another difference is that `ChangeType` does not work for class hierarchies, so this fails:
+Another difference is that `ChangeType` does not work well for class hierarchies, so this fails:
 
 ```c#
 class A { }
