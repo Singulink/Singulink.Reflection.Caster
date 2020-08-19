@@ -78,7 +78,7 @@ Convert.ChangeType(b, typeof(A)); // InvalidCastException
 
 ### Performance
 
-Performance is significantly improved in this library, particularly when using the generic casting methods which do not box the input and return values, thus reducing GC pressure.
+Performance is significantly improved in this library, particularly when using the generic casting methods which do not box the input and return values (thus reducing GC pressure).
 
 ### Unchecked Casts
 
