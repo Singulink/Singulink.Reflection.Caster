@@ -17,7 +17,7 @@ namespace Singulink.Reflection
         /// <param name="toType">The output object type.</param>
         /// <returns>True if a valid cast exists, otherwise false.</returns>
         /// <remarks>
-        /// <para>The result of this method is not cached interally making this is a relatively slow operation, so you should cache the result yourself if the
+        /// <para>The result of this method is not cached internally making this is a relatively slow operation, so you should cache the result yourself if the
         /// value is needed frequently.</para>
         /// </remarks>
         public static bool IsValidCast(Type fromType, Type toType)
