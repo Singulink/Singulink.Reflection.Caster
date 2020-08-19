@@ -14,7 +14,7 @@ Supported Runtimes: Anywhere .NET Standard 2.0 is supported, including .NET Fram
 
 ## Usage
 
-All the functionality is exposed via static methods the `Caster` class. If the types are statically known then the generic methods are the fastest and easiest to use. For example, if you wanted to write a method that converts a generic value to a generic enum, you could do this:
+All the functionality is exposed via static methods the `Caster` class. If the types are known at compile time then the generic methods are the fastest and easiest to use. For example, if you wanted to write a method that converts a generic value to a generic enum, you could do this:
 
 ```c#
 // Convert input to an enum type:
@@ -59,13 +59,13 @@ object byteValue = caster.Invoke(intValue);
 
 ### No dependency on IConvertible
 
-The `ChangeType` method depends on types implementing the `IConvertible` interface, where-as `Caster` executes the same instructions as real casts in codeand thus works with types that do not implement `IConvertible`.
+The `ChangeType` method relies on types implementing the `IConvertible` interface, where-as `Caster` executes the same instructions as normal casts in code and thus works even with types that do not implement `IConvertible`.
 
 ### Behavior
 
-Since this library generates the same code as real casts, the behavior can differ significantly from `ChangeType`, which often does a lot of voodoo magic to coerce values into the requested type. For example, it attempts to parse string values and converts between boolean and numeric data types, both things that casts (and thus `Caster`) do not do. If you are expecting normal casting behavior then using `ChangeType` can lead to unexpected results in some circumstances.
+Since `Caster` generates the same code as normal casts, its behavior can differ significantly from `ChangeType` which often does a lot of voodoo magic to coerce values into the requested type. For example, it attempts to parse string values and converts between boolean and numeric data types, both things that casts (and thus `Caster`) do not do. If you are expecting normal casting behavior then using `ChangeType` can lead to unexpected results in many circumstances.
 
-Another difference is that `ChangeType` does not work for downcasting, so this fails:
+Another difference is that `ChangeType` does not work for class hierarchies, so this fails:
 
 ```c#
 class A { }
@@ -78,7 +78,7 @@ Convert.ChangeType(b, typeof(A)); // InvalidCastException
 
 ### Performance
 
-Performance is significantly improved in this library, particularly when using the generic casting methods which do not box the input and return value, thus reducing GC pressure.
+Performance is significantly improved in this library, particularly when using the generic casting methods which do not box the input and return values, thus reducing GC pressure.
 
 ### Unchecked Casts
 
