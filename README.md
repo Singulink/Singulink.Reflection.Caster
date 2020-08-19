@@ -43,7 +43,7 @@ object byteValue = Caster.DynamicCast(intValue, typeof(byte)); // byteValue = 64
 
 ```
 
-The dynamic cast methods above call `GetType()` on the value and then perform a fast dictionary lookup to get a cached caster delegate that converts between the types, but you can also grab the caster delegate and store it in a field to avoid the cache lookup:
+The dynamic cast methods above call `GetType()` on the value and then perform a fast dictionary lookup to get a cached delegate that casts between the types, but you can also grab the caster delegate and store it in a field to avoid the cache lookup:
 
 ```c#
 
@@ -54,3 +54,32 @@ Func<object, object> caster = Caster.GetCaster(typeof(int), typeof(byte));
 object intValue = 123456;
 object byteValue = caster.Invoke(intValue);
 ```
+
+## How is this different than Convert.ChangeType()?
+
+### No dependency on IConvertible
+
+The `ChangeType` method depends on types implementing the `IConvertible` interface, where-as `Caster` executes the same instructions as real casts in codeand thus works with types that do not implement `IConvertible`.
+
+### Behavior
+
+Since this library generates the same code as real casts, the behavior can differ significantly from `ChangeType`, which often does a lot of voodoo magic to coerce values into the requested type. For example, it attempts to parse string values and converts between boolean and numeric data types, both things that casts (and thus `Caster`) do not do. If you are expecting normal casting behavior then using `ChangeType` can lead to unexpected results in some circumstances.
+
+Another difference is that `ChangeType` does not work for downcasting, so this fails:
+
+```c#
+class A { }
+class B : A { }
+
+object b = new B();
+Convert.ChangeType(b, typeof(A)); // InvalidCastException
+
+```
+
+### Performance
+
+Performance is significantly improved in this library, particularly when using the generic casting methods which do not box the input and return value, thus reducing GC pressure.
+
+### Unchecked Casts
+
+`Caster` has checked and unchecked versions of all the methods or you can pass a boolean parameter to determine whether a checked cast is performed.
