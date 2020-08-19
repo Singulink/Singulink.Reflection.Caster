@@ -10,7 +10,7 @@ This library provides dynamic and generic casting capabilities between types det
 
 Simply install the `Singulink.Reflection.Caster` package from NuGet into your project.
 
-Supported Runtimes: Anywhere .NET Standard 2.0 is supported, including .NET Framework 4.6.1+ and .NET Core 2.0+.
+**Supported Runtimes**: Anywhere .NET Standard 2.0 is supported, including .NET Framework 4.6.1+ and .NET Core 2.0+.
 
 ## Usage
 
