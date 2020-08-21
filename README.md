@@ -12,9 +12,13 @@ Simply install the `Singulink.Reflection.Caster` package from NuGet into your pr
 
 **Supported Runtimes**: Anywhere .NET Standard 2.0 is supported, including .NET Framework 4.6.1+ and .NET Core 2.0+.
 
+## API
+
+You can view the API on [FuGet](https://www.fuget.org/packages/Singulink.Reflection.Caster). All the functionality is exposed via static methods on the `Caster` class.
+
 ## Usage
 
-All the functionality is exposed via static methods on the `Caster` class. If the types are known at compile time then the generic methods are the fastest and easiest to use. For example, if you wanted to write a method that converts a generic value to a generic enum, you could do this:
+If the types are known at compile time then the generic methods are the fastest and easiest to use. For example, if you wanted to write a method that converts a generic value to a generic enum, you could do this:
 
 ```c#
 // Convert input to an enum type:
