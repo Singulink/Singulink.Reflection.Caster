@@ -4,7 +4,9 @@
 [![View nuget packages](https://img.shields.io/nuget/v/Singulink.Reflection.Caster.svg)](https://www.nuget.org/packages/Singulink.Reflection.Caster/)
 [![Build and Test](https://github.com/Singulink/Singulink.Reflection.Caster/workflows/build%20and%20test/badge.svg)](https://github.com/Singulink/Singulink.Reflection.Caster/actions?query=workflow%3A%22build+and+test%22)
 
-This library provides dynamic and generic casting capabilities between types determined at runtime. The casting functionality is provided by cached delegates created from compiled expressions so the casts are very fast - the only overhead is a delegate call if you use the generic methods. Both checked and unchecked casts are supported.
+**Caster** provides dynamic and generic casting capabilities between types determined at runtime. The casting functionality is provided by cached delegates created from compiled expressions so the casts are very fast - the only overhead is a delegate call if you use the generic methods. Both checked and unchecked casts are supported.
+
+**Caster** is part of the **Singulink Libraries** collection. Visit https://github.com/Singulink to see the full list of libraries available.
 
 ## Installation
 
@@ -18,20 +20,25 @@ You can view the API on [FuGet](https://www.fuget.org/packages/Singulink.Reflect
 
 ## Usage
 
-If the types are known at compile time then the generic methods are the fastest and easiest to use. For example, if you wanted to write a method that converts a generic value to a generic enum, you could do this:
+Normally if you want to cast between two types then the compiler must be able to statically determine what implicit/explicit conversion operator should be used. This is problematic for generic types, so this does not work, for example:
 
 ```c#
-// Convert input to an enum type:
-
-public static TEnum ToEnum<TValue, TEnum>(TValue value)
-    where TValue : unmanaged
-    where TEnum : Enum
+int GetValueAsInt<T>(T value)
 {
-    return Caster.Cast<TValue, TEnum>(value);
+    return (int)value;
 }
 ```
 
-If the types are not known statically then there are a set of dynamic cast methods that can be used. For example:
+If you know that `T` is (or should be) castable to `int` then you can do this to effectively get the desired behavior:
+
+```c#
+int GetValueAsInt<T>(T value)
+{
+    return Caster.Cast<T, int>(value);
+}
+```
+
+If the types are not known statically then there are a set of dynamic cast methods that can be used which accept `Type` parameters. For example:
 
 ```c#
 object intValue = 123456;
@@ -67,9 +74,9 @@ The `ChangeType` method relies on types implementing the `IConvertible` interfac
 
 ### Behavior
 
-Since `Caster` generates the same code as normal casts, its behavior can differ significantly from `ChangeType` which often does a lot of voodoo magic to coerce values into the requested type. For example, it attempts to parse string values and converts between boolean and numeric data types, both things that casts (and thus `Caster`) do not do. If you are expecting normal casting behavior then using `ChangeType` can lead to unexpected results in many circumstances.
+Since `Caster` generates the same code as normal casts, its behavior can differ significantly from `ChangeType` which often does a lot of voodoo magic to coerce values into the requested type. For example, `ChangeType` attempts to parse string values and converts between boolean and numeric data types, both things that casts (and thus `Caster`) do not do. If you are expecting normal casting behavior then using `ChangeType` can lead to unexpected results in many circumstances.
 
-Another difference is that `ChangeType` does not work well for class hierarchies, so this fails:
+Another difference is that `ChangeType` does not work for class hierarchies, so this fails:
 
 ```c#
 class A { }
