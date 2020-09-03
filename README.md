@@ -4,19 +4,28 @@
 [![View nuget packages](https://img.shields.io/nuget/v/Singulink.Reflection.Caster.svg)](https://www.nuget.org/packages/Singulink.Reflection.Caster/)
 [![Build and Test](https://github.com/Singulink/Singulink.Reflection.Caster/workflows/build%20and%20test/badge.svg)](https://github.com/Singulink/Singulink.Reflection.Caster/actions?query=workflow%3A%22build+and+test%22)
 
-**Caster** provides dynamic and generic casting capabilities between types determined at runtime. The casting functionality is provided by cached delegates created from compiled expressions so the casts are very fast - the only overhead is a delegate call if you use the generic methods. Both checked and unchecked casts are supported.
+**Singulink.Reflection.Caster** provides dynamic and generic casting capabilities between types determined at runtime. The casting functionality is provided by cached delegates created from compiled expressions so the casts are very fast - the only overhead is a delegate call if you use the generic methods. Both checked and unchecked casts are supported.
 
-**Caster** is part of the **Singulink Libraries** collection. Visit https://github.com/Singulink to see the full list of libraries available.
+### About Singulink
+
+*Shameless plug*: We are a small team of engineers and designers dedicated to building beautiful, functional and well-engineered software solutions. We offer very competitive rates as well as fixed-price contracts and welcome inquiries to discuss any custom development / project support needs you may have.
+
+This package is part of our **Singulink Libraries** collection. Visit https://github.com/Singulink to see our full list of publicly available libraries and other open-source projects.
 
 ## Installation
 
 Simply install the `Singulink.Reflection.Caster` package from NuGet into your project.
 
-**Supported Runtimes**: Anywhere .NET Standard 2.0 is supported, including .NET Framework 4.6.1+ and .NET Core 2.0+.
+**Supported Runtimes**: Anywhere .NET Standard 2.0+ is supported, including:
+- .NET Core 2.0+
+- .NET Framework 4.6.1+
+- Mono 5.4+
+- Xamarin.iOS 10.14+
+- Xamarin.Android 8.0+
 
 ## API
 
-You can view the API on [FuGet](https://www.fuget.org/packages/Singulink.Reflection.Caster). All the functionality is exposed via static methods on the `Caster` class.
+You can view the API on [FuGet](https://www.fuget.org/packages/Singulink.Reflection.Caster). All the functionality is exposed via static methods on the `Caster` class in the `Singulink.Reflection` namespace.
 
 ## Usage
 
@@ -29,7 +38,7 @@ int GetValueAsInt<T>(T value)
 }
 ```
 
-If you know that `T` is (or should be) castable to `int` then you can do this to effectively get the desired behavior:
+If you know that `T` is (or should be) castable to `int` then you can do this library to work around the issue and effectively get the desired behavior:
 
 ```c#
 int GetValueAsInt<T>(T value)
@@ -38,7 +47,7 @@ int GetValueAsInt<T>(T value)
 }
 ```
 
-If the types are not known statically then there are a set of dynamic cast methods that can be used which accept `Type` parameters. For example:
+If the types are not known statically then there is a set of dynamic cast methods that can be used which accept `Type` parameters. For example:
 
 ```c#
 object intValue = 123456;
@@ -89,7 +98,7 @@ Convert.ChangeType(b, typeof(A)); // InvalidCastException
 
 ### Performance
 
-Performance is significantly improved in this library, particularly when using the generic casting methods which do not box the input and return values (thus reducing GC pressure).
+Performance is significantly improved in this library, particularly when using the generic casting methods that do not box the input and return values, resulting in less allocations and lower GC pressure.
 
 ### Unchecked Casts
 
