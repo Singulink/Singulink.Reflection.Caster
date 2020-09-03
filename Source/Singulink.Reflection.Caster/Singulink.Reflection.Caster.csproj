@@ -4,10 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Singulink.Reflection</RootNamespace>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <Authors>Mike Marynowski</Authors>
-    <Company>Singulink</Company>
+    <Authors>Singulink</Authors>
     <Description>Provides super fast dynamic and generic casting capabilities between types determined at runtime.</Description>
-    <Copyright>Copyright (c) 2020 Singulink</Copyright>
+    <Copyright>© Singulink. All rights reserved.</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Singulink/Singulink.Reflection.Caster</PackageProjectUrl>
     <PackageTags>cast generic dynamic</PackageTags>
