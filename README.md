@@ -38,7 +38,7 @@ int GetValueAsInt<T>(T value)
 }
 ```
 
-If you know that `T` is (or should be) castable to `int` then you can do this library to work around the issue and effectively get the desired behavior:
+If you know that `T` is (or should be) castable to `int` then you can use this library to work around the issue and effectively get the desired behavior:
 
 ```c#
 int GetValueAsInt<T>(T value)
